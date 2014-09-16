@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/Sendtotext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/emailsendto"
+        android:layout_alignBottom="@+id/emailsendto"
+        android:layout_alignParentLeft="true"
+        android:text="Send To:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/sendallbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/emailsendto"
+        android:layout_marginTop="30dp"
+        android:text="Send All" />
+
+    <Button
+        android:id="@+id/sendcurrentbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/sendallbutton"
+        android:layout_marginTop="30dp"
+        android:text="Send Current" />
+
+    <Button
+        android:id="@+id/selecttodobutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/sendcurrentbutton"
+        android:layout_marginTop="30dp"
+        android:text="Select From Unarchived To Do&apos;s" />
+
+    <Button
+        android:id="@+id/sendarchivebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/selecttodobutton"
+        android:layout_marginTop="30dp"
+        android:text="Select From Archived To Do&apos;s" />
+
+    <EditText
+        android:id="@+id/emailsendto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/emailtext"
+        android:layout_marginTop="30dp"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/emailtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/emailsendto"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:text="E-mail"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40dp" />
+
+</RelativeLayout>
