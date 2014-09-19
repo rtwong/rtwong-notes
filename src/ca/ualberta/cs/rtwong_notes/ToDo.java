@@ -1,6 +1,8 @@
 package ca.ualberta.cs.rtwong_notes;
 
-public class ToDo {
+import java.io.Serializable;
+
+public class ToDo implements Serializable{
 	protected String task;
 	protected boolean checked;
 	
@@ -24,5 +26,13 @@ public class ToDo {
 		checked = !checked;
 	}
 	
+	public String toString() {
+		if (this.getChecked()) {
+			return "[X] " + task;
+		}
+		else {
+			return "[ ] " + task;
+		}
+	}
 	
 }

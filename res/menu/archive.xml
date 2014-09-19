@@ -1,8 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ca.ualberta.cs.rtwong_notes.MainActivity" >
-    <item android:id="@+id/switchArchive" android:title="See Archive" android:orderInCategory="200"></item>
+    tools:context="ca.ualberta.cs.rtwong_notes.ArchiveActivity" >
+
+    <item android:id="@+id/switchToDo" android:title="See ToDo's" android:orderInCategory="200"></item>
     <item android:id="@+id/switchSummary" android:title="Summary Stats" android:orderInCategory="300"></item>
     <item android:id="@+id/switchEmail" android:title="Email ToDo's" android:orderInCategory="400"></item>
 

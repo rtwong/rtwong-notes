@@ -14,18 +14,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="+" />
-
-    <EditText
-        android:id="@+id/AddToDoText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/AddTaskButton"
-        android:layout_toLeftOf="@+id/AddTaskButton"
-        android:ems="10" />
+        android:text="+" 
+        android:onClick="addToDo"/>
 
     <ListView
-        android:id="@+id/Todolist"
+        android:id="@+id/todoListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/AddTaskButton"
@@ -41,8 +34,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
         android:text="To-Do"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/AddToDoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/AddTaskButton"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>
