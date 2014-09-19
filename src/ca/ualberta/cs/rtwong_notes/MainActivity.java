@@ -15,15 +15,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 package ca.ualberta.cs.rtwong_notes;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,7 +34,7 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity {
 		
-	private static final String FILENAME = "rtwongfile.sav";
+	private DataManager dataManager;
 	
 	private ToDoList todoList;
 	
@@ -55,13 +52,14 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         bodyText = (EditText) findViewById(R.id.AddToDoText);
         todoListView = (ListView) findViewById(R.id.todoListView);
+
     }
 
     @Override
     protected void onStart() {
     	super.onStart();
-    	
     	todoList = this.loadToDoList();
+    	dataManager = new DataManager(getApplicationContext());
     	todoViewAdapter = new ArrayAdapter<ToDo>(this, R.layout.list_item, todoList.getToDos() ) {
 		};
     	todoListView.setAdapter(todoViewAdapter);
@@ -96,36 +94,14 @@ public class MainActivity extends Activity {
         }
     }
    
+    
+    
 	public ToDoList loadToDoList() {
-		ToDoList todoList = new ToDoList();
-
-		try {
-			FileInputStream fis = new FileInputStream(FILENAME);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-
-			todoList = (ToDoList) ois.readObject();
-			fis.close();
-			ois.close();
-
-		} catch (Exception e) {
-			Log.i("rtwong-notes", "Error casting");
-			e.printStackTrace();
-		} 
-
-		return todoList;
+		return dataManager.load();
 	}
 	
 	public void saveToDoList(ToDoList todoList) {
-		try {
-			FileOutputStream fos = new FileOutputStream(FILENAME);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(todoList);
-			fos.close();
-			oos.close();
-		} 
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		dataManager.save(todoList);
 	}
 
     
@@ -136,9 +112,10 @@ public class MainActivity extends Activity {
     	
     	String text = bodyText.getText().toString();
     	ToDo todo = new ToDo(text);
-    	todoList.addToDo(todo);
+    	todoList.archiveToDo(todo);
     	todoViewAdapter.notifyDataSetChanged();
     	bodyText.setText("");
+    	this.saveToDoList(todoList);
     
     }
     

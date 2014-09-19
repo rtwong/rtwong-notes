@@ -28,7 +28,6 @@ public class ArchiveActivity extends ActionBarActivity {
 		
         archiveListView = (ListView) findViewById(R.id.ArchivedTodoList);
 		Intent i = getIntent();
-		//todoList = new ToDoList();
 		todoList = (ToDoList)i.getSerializableExtra("EXTRA_DATA");
 	}
 	
