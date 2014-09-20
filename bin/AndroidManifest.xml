@@ -34,6 +34,14 @@
             android:name=".EmailActivity"
             android:label="@string/title_activity_email" >
         </activity>
+        <activity
+            android:name=".EmailArchived"
+            android:label="@string/title_activity_email_archived" >
+        </activity>
+        <activity
+            android:name=".EmailCurrent"
+            android:label="@string/title_activity_email_current" >
+        </activity>
     </application>
 
 </manifest>

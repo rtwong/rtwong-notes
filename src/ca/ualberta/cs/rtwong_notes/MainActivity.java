@@ -15,28 +15,25 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 package ca.ualberta.cs.rtwong_notes;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
-
+// home activity controller, each new layout page is a new activity for simplicity
+// simple functions are copied because it is easier to copy than to do an abstraction
+// on a project of this scope.
 public class MainActivity extends Activity {
 		
 	private DataManager dataManager;
@@ -49,15 +46,12 @@ public class MainActivity extends Activity {
 	
 	private EditText bodyText;
 	
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
+        super.onCreate(savedInstanceState);    
         setContentView(R.layout.activity_main);
         bodyText = (EditText) findViewById(R.id.AddToDoText);
         todoListView = (ListView) findViewById(R.id.todoListView);
-
     }
 
     @Override
@@ -68,8 +62,16 @@ public class MainActivity extends Activity {
     	todoViewAdapter = new ArrayAdapter<ToDo>(this, R.layout.list_item, todoList.getToDos()); 
     	todoListView.setAdapter(todoViewAdapter);
     	registerForContextMenu(todoListView);
+    	// create listener to allow for clicks to check/uncheck lines
+    	todoListView.setOnItemClickListener(new OnItemClickListener(){
+			@Override
+			public void onItemClick(AdapterView<?> adapter, View v,int position, long id) {
+				ToDo todo = todoViewAdapter.getItem(adapter.getPositionForView(v));
+		    	todoList.toggleCheckToDo(todo);
+		    	todoViewAdapter.notifyDataSetChanged();
+			}
+    	});
     }
-    
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,44 +80,40 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    // option menu to move to different activities
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        
         switch (id) {
         case R.id.switchArchive:
         	Intent archiveIntent = new Intent(this, ArchiveActivity.class);
         	saveToDoList(todoList);
         	startActivity(archiveIntent);
         	return true;
-        	
         case R.id.switchSummary:
         	Intent summaryIntent = new Intent(this, SummaryActivity.class);
         	saveToDoList(todoList);
         	startActivity(summaryIntent);
         	return true;
-        	
         case R.id.switchEmail:
         	Intent emailIntent = new Intent(this, EmailActivity.class);
         	saveToDoList(todoList);
         	startActivity(emailIntent);
         	return true;
-              	
         default:
         	return super.onOptionsItemSelected(item);
         }
     }
    
+    // Longclicks create context menus that allow user to archive or remove using GUI
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-    	super.onCreateContextMenu(menu, v, menuInfo);
-    	
+    	super.onCreateContextMenu(menu, v, menuInfo);	
     	MenuInflater inflater = getMenuInflater();
     	inflater.inflate(R.menu.todopopupmenu, menu);
-    	
     }
     
     @Override
@@ -132,26 +130,29 @@ public class MainActivity extends Activity {
     		return super.onContextItemSelected(item);
     	}
     }
-    
-    
-    
+   
+    // archive todo and refresh UI
     public void archiveToDo(AdapterContextMenuInfo id) {
     	ToDo todo = todoViewAdapter.getItem(id.position);
     	todoList.archiveToDo(todo);
+    	this.saveToDoList(todoList);
     	todoViewAdapter.notifyDataSetChanged();
     }
     
+    // delete todo and refresh UI
     public void deleteToDo(AdapterContextMenuInfo id) {
     	ToDo todo = (ToDo) todoListView.getItemAtPosition(id.position);
     	todoList.removeToDo(todo);
+    	this.saveToDoList(todoList);
     	todoViewAdapter.notifyDataSetChanged();
     }
     
-
+    // load the ToDoList interface
 	public ToDoList loadToDoList() {
 		return dataManager.load();
 	}
 	
+	// save the ToDoList interface
 	public void saveToDoList(ToDoList todoList) {
 		dataManager.save(todoList);
 	}

@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 
+// basically a controller that can handle all in activity interaction with ToDos
 public class ToDoList implements Serializable{
 	
 	protected ArrayList<ToDo> todoList;
+	
 	protected ArrayList<ToDo> archivedList;
+	
 	protected int[] summaryList;
+	
 	protected ArrayList<String> printList;
 	
 	
@@ -34,22 +38,16 @@ public class ToDoList implements Serializable{
 		String archivedChecked = "Checked off ToDo's in Archive:";
 		String archivedUnchecked = "Unchecked ToDo's in Archive: ";
 		printList = new ArrayList<String>();
-		
 		todoChecked += String.valueOf(summaryList[0]);
 		printList.add(todoChecked);
-		
 		todoUnchecked += String.valueOf(summaryList[1]);
 		printList.add(todoUnchecked);
-		
 		totalArchived += String.valueOf(summaryList[2]);
 		printList.add(totalArchived);
-		
 		archivedChecked += String.valueOf(summaryList[3]);
 		printList.add(archivedChecked);
-		
 		archivedUnchecked += String.valueOf(summaryList[4]);
 		printList.add(archivedUnchecked);
-		
 		return printList;
 	}
 	
@@ -102,7 +100,6 @@ public class ToDoList implements Serializable{
 	public void archiveToDo (ToDo testToDo) {
 		todoList.remove(testToDo);
 		archivedList.add(testToDo);
-		
 		// increment totalArchived counter
 		summaryList[2] += 1;
 		if (testToDo.getChecked()) {
@@ -137,7 +134,6 @@ public class ToDoList implements Serializable{
 	}
 	
 	public void toggleCheckToDo(ToDo testToDo) {
-		testToDo.toggleChecked();
 		if (testToDo.getChecked()) {
 			// it is already checked, we are unchecking it, decrement todoChecked and increment todoUnchecked
 			summaryList[0] -= 1;
@@ -148,9 +144,6 @@ public class ToDoList implements Serializable{
 			summaryList[0] += 1;
 			summaryList[1] -= 1;
 		}
-		
+		testToDo.toggleChecked();
 	}
-	
-	
-	
 }

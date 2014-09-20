@@ -20,6 +20,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:onClick="selectArchived"
         android:text="Select From Archived To Do&apos;s" />
 
     <Button
@@ -29,7 +30,8 @@
         android:layout_above="@+id/sendarchivebutton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:text="Select From Unarchived To Do&apos;s" />
+        android:onClick="selectCurrent"
+        android:text="Select From Current To Do&apos;s" />
 
     <Button
         android:id="@+id/sendcurrentbutton"
@@ -38,6 +40,7 @@
         android:layout_above="@+id/selecttodobutton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:onClick="sendCurrent"
         android:text="Send Current" />
 
     <Button
@@ -47,6 +50,7 @@
         android:layout_above="@+id/sendcurrentbutton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:onClick="sendAll"
         android:text="Send All" />
 
     <EditText

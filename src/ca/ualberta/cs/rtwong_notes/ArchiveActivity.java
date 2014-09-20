@@ -1,6 +1,5 @@
 package ca.ualberta.cs.rtwong_notes;
 
-import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
+// controller of the Archive Activity, separated activity for simplicity
 public class ArchiveActivity extends Activity {
 	
 	private ToDoList todoList;
@@ -24,14 +24,10 @@ public class ArchiveActivity extends Activity {
 	
 	private DataManager dataManager;
 	
-	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.activity_archive);
-		
         archiveListView = (ListView) findViewById(R.id.ArchivedTodoList);
 	}
 	
@@ -45,8 +41,6 @@ public class ArchiveActivity extends Activity {
     	registerForContextMenu(archiveListView);
     }
 	
-	
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -59,40 +53,34 @@ public class ArchiveActivity extends Activity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        
+        int id = item.getItemId();    
+        // sets the option menu, and starts that activity if it is clicked
         switch (id) {
         case R.id.switchToDo:
         	Intent todoIntent = new Intent(this, MainActivity.class);
         	saveToDoList(todoList);
         	startActivity(todoIntent);
         	return true;
-        	
         case R.id.switchSummary:
         	Intent summaryIntent = new Intent(this, SummaryActivity.class);
         	saveToDoList(todoList);
         	startActivity(summaryIntent);
         	return true;
-    
         case R.id.switchEmail:
         	Intent emailIntent = new Intent(this, EmailActivity.class);
         	saveToDoList(todoList);
         	startActivity(emailIntent);
         	return true;
-        	
         default:
         	return super.onOptionsItemSelected(item);
         }
 	}
 	
-	
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-    	super.onCreateContextMenu(menu, v, menuInfo);
-    	
+    	super.onCreateContextMenu(menu, v, menuInfo);	
     	MenuInflater inflater = getMenuInflater();
     	inflater.inflate(R.menu.archivepopupmenu, menu);
-    	
     }
     
     @Override
@@ -110,30 +98,20 @@ public class ArchiveActivity extends Activity {
     	}
     }
 	
+    // moves selected item from archive to current
     public void moveToDo(AdapterContextMenuInfo id) {
     	ToDo todo = archiveViewAdapter.getItem(id.position);
     	todoList.unarchiveToDo(todo);
+    	this.saveToDoList(todoList);
     	archiveViewAdapter.notifyDataSetChanged();
     }
-    
+    // deletes selected item from archive
     public void deleteToDo(AdapterContextMenuInfo id) {
     	ToDo todo = (ToDo) archiveListView.getItemAtPosition(id.position);
     	todoList.removeArchived(todo);
+    	this.saveToDoList(todoList);
     	archiveViewAdapter.notifyDataSetChanged();
     }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public ToDoList loadToDoList() {
 		return dataManager.load();

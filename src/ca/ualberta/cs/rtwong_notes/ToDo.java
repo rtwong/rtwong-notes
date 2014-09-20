@@ -2,8 +2,11 @@ package ca.ualberta.cs.rtwong_notes;
 
 import java.io.Serializable;
 
+// simple class that contains basic information about a ToDo listing
 public class ToDo implements Serializable{
+	
 	protected String task;
+	
 	protected boolean checked;
 	
 	public ToDo(String testtask) {
@@ -34,5 +37,4 @@ public class ToDo implements Serializable{
 			return "[ ] " + task;
 		}
 	}
-	
 }

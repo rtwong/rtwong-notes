@@ -8,5 +8,7 @@
     <string name="title_activity_email">ToDoodle</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_email_archived">ToDoodle</string>
+    <string name="title_activity_email_current">ToDoodle</string>
 
 </resources>
