@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="11"
         android:targetSdkVersion="17" />
 
     <application
@@ -25,6 +25,14 @@
         <activity
             android:name=".ArchiveActivity"
             android:label="@string/title_activity_archive" >
+        </activity>
+        <activity
+            android:name=".SummaryActivity"
+            android:label="@string/title_activity_summary" >
+        </activity>
+        <activity
+            android:name=".EmailActivity"
+            android:label="@string/title_activity_email" >
         </activity>
     </application>
 

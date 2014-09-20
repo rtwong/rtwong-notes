@@ -24,9 +24,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -58,14 +63,12 @@ public class MainActivity extends Activity {
     @Override
     protected void onStart() {
     	super.onStart();
-    	todoList = this.loadToDoList();
     	dataManager = new DataManager(getApplicationContext());
-    	todoViewAdapter = new ArrayAdapter<ToDo>(this, R.layout.list_item, todoList.getToDos() ) {
-		};
+    	todoList = this.loadToDoList();
+    	todoViewAdapter = new ArrayAdapter<ToDo>(this, R.layout.list_item, todoList.getToDos()); 
     	todoListView.setAdapter(todoViewAdapter);
+    	registerForContextMenu(todoListView);
     }
-    
-    
     
     
     @Override
@@ -84,18 +87,67 @@ public class MainActivity extends Activity {
         
         switch (id) {
         case R.id.switchArchive:
-        	Intent intent = new Intent(this, ArchiveActivity.class);
-        	intent.putExtra("EXTRA_DATA", todoList);
-        	startActivity(intent);
+        	Intent archiveIntent = new Intent(this, ArchiveActivity.class);
+        	saveToDoList(todoList);
+        	startActivity(archiveIntent);
         	return true;
-        
+        	
+        case R.id.switchSummary:
+        	Intent summaryIntent = new Intent(this, SummaryActivity.class);
+        	saveToDoList(todoList);
+        	startActivity(summaryIntent);
+        	return true;
+        	
+        case R.id.switchEmail:
+        	Intent emailIntent = new Intent(this, EmailActivity.class);
+        	saveToDoList(todoList);
+        	startActivity(emailIntent);
+        	return true;
+              	
         default:
         	return super.onOptionsItemSelected(item);
         }
     }
    
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+    	super.onCreateContextMenu(menu, v, menuInfo);
+    	
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.todopopupmenu, menu);
+    	
+    }
+    
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+    	AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+    	switch(item.getItemId()) {
+    	case R.id.sendtoarchive:
+    		archiveToDo(info);
+    		return true;
+    	case R.id.todopopupremove:
+    		deleteToDo(info);
+    		return true;
+    	default:
+    		return super.onContextItemSelected(item);
+    	}
+    }
     
     
+    
+    public void archiveToDo(AdapterContextMenuInfo id) {
+    	ToDo todo = todoViewAdapter.getItem(id.position);
+    	todoList.archiveToDo(todo);
+    	todoViewAdapter.notifyDataSetChanged();
+    }
+    
+    public void deleteToDo(AdapterContextMenuInfo id) {
+    	ToDo todo = (ToDo) todoListView.getItemAtPosition(id.position);
+    	todoList.removeToDo(todo);
+    	todoViewAdapter.notifyDataSetChanged();
+    }
+    
+
 	public ToDoList loadToDoList() {
 		return dataManager.load();
 	}
@@ -111,12 +163,13 @@ public class MainActivity extends Activity {
     public void addToDo(View v) {
     	
     	String text = bodyText.getText().toString();
-    	ToDo todo = new ToDo(text);
-    	todoList.archiveToDo(todo);
-    	todoViewAdapter.notifyDataSetChanged();
-    	bodyText.setText("");
-    	this.saveToDoList(todoList);
-    
+    	if (!text.isEmpty()) {
+        	ToDo todo = new ToDo(text);
+        	todoList.addToDo(todo);
+        	todoViewAdapter.notifyDataSetChanged();
+        	bodyText.setText("");
+        	this.saveToDoList(todoList);
+    	}
     }
     
     

@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ca.ualberta.cs.rtwong_notes.SummaryActivity" >
+    
+    <item android:id="@+id/switchToDo" android:title="See ToDo's"></item><item android:id="@+id/switchArchive" android:title="See Archive"></item>
+    <item android:id="@+id/switchEmail" android:title="Email ToDo's"></item>
+
+</menu>

@@ -14,52 +14,48 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/sendallbutton"
+        android:id="@+id/sendarchivebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/emailsendto"
-        android:layout_marginTop="30dp"
-        android:text="Send All" />
-
-    <Button
-        android:id="@+id/sendcurrentbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/sendallbutton"
-        android:layout_marginTop="30dp"
-        android:text="Send Current" />
+        android:text="Select From Archived To Do&apos;s" />
 
     <Button
         android:id="@+id/selecttodobutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/sendarchivebutton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/sendcurrentbutton"
-        android:layout_marginTop="30dp"
         android:text="Select From Unarchived To Do&apos;s" />
 
     <Button
-        android:id="@+id/sendarchivebutton"
+        android:id="@+id/sendcurrentbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/selecttodobutton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/selecttodobutton"
-        android:layout_marginTop="30dp"
-        android:text="Select From Archived To Do&apos;s" />
+        android:text="Send Current" />
+
+    <Button
+        android:id="@+id/sendallbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/sendcurrentbutton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="Send All" />
 
     <EditText
         android:id="@+id/emailsendto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/sendallbutton"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/emailtext"
-        android:layout_marginTop="30dp"
+        android:layout_marginBottom="45dp"
         android:ems="10" />
 
     <TextView
@@ -68,7 +64,6 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/emailsendto"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
         android:text="E-mail"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="40dp" />

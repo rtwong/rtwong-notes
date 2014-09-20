@@ -10,7 +10,7 @@ public class ToDoList implements Serializable{
 	protected ArrayList<ToDo> todoList;
 	protected ArrayList<ToDo> archivedList;
 	protected int[] summaryList;
-	
+	protected ArrayList<String> printList;
 	
 	
 	// summaryList is populated with the summary stats in the following order:
@@ -26,9 +26,31 @@ public class ToDoList implements Serializable{
 		int[] summaryList = {0,0,0,0,0};
 	}
 	
-	// returns summary stats in order of: ToDoChecked, ToDoUnchecked, totalArchived, archivedChecked, archivedUnchecked
-	public int[] getSummary() {
-		return summaryList;
+	// returns summary stats in order of: todoChecked, todoUnchecked, totalArchived, archivedChecked, archivedUnchecked
+	public ArrayList<String> getSummary() {
+		String todoChecked = "Checked off ToDo's: ";
+		String todoUnchecked = "Unchecked ToDo's: ";
+		String totalArchived = "Total ToDo's in Archive: ";
+		String archivedChecked = "Checked off ToDo's in Archive:";
+		String archivedUnchecked = "Unchecked ToDo's in Archive: ";
+		printList = new ArrayList<String>();
+		
+		todoChecked += String.valueOf(summaryList[0]);
+		printList.add(todoChecked);
+		
+		todoUnchecked += String.valueOf(summaryList[1]);
+		printList.add(todoUnchecked);
+		
+		totalArchived += String.valueOf(summaryList[2]);
+		printList.add(totalArchived);
+		
+		archivedChecked += String.valueOf(summaryList[3]);
+		printList.add(archivedChecked);
+		
+		archivedUnchecked += String.valueOf(summaryList[4]);
+		printList.add(archivedUnchecked);
+		
+		return printList;
 	}
 	
 	// returns all current ToDos
@@ -80,6 +102,7 @@ public class ToDoList implements Serializable{
 	public void archiveToDo (ToDo testToDo) {
 		todoList.remove(testToDo);
 		archivedList.add(testToDo);
+		
 		// increment totalArchived counter
 		summaryList[2] += 1;
 		if (testToDo.getChecked()) {
@@ -92,6 +115,7 @@ public class ToDoList implements Serializable{
 			summaryList[1] -= 1;
 			summaryList[4] += 1;
 		}
+		
 	}
 	
 	// moves ToDo from archived to current
