@@ -157,10 +157,6 @@ public class MainActivity extends Activity {
 		dataManager.save(todoList);
 	}
 
-    
-    
-    
-    
     public void addToDo(View v) {
     	
     	String text = bodyText.getText().toString();
@@ -171,7 +167,5 @@ public class MainActivity extends Activity {
         	bodyText.setText("");
         	this.saveToDoList(todoList);
     	}
-    }
-    
-    
+    }    
 }
