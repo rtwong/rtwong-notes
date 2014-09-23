@@ -41,7 +41,8 @@
         android:id="@+id/AddToDoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@+id/AddTaskButton"
+        android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@+id/AddTaskButton"
         android:ems="10" >
 

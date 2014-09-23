@@ -3,16 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/Sendtotext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/emailsendto"
-        android:layout_alignBottom="@+id/emailsendto"
-        android:layout_alignParentLeft="true"
-        android:text="Send To:"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <Button
         android:id="@+id/sendarchivebutton"
         android:layout_width="wrap_content"
@@ -53,15 +43,6 @@
         android:onClick="sendAll"
         android:text="Send All" />
 
-    <EditText
-        android:id="@+id/emailsendto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/sendallbutton"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="45dp"
-        android:ems="10" />
-
     <TextView
         android:id="@+id/emailtext"
         android:layout_width="wrap_content"
@@ -71,5 +52,27 @@
         android:text="E-mail"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="40dp" />
+
+    <TextView
+        android:id="@+id/Sendtotext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/sendallbutton"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="78dp"
+        android:text="Send To:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/emailsendto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Sendtotext"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/Sendtotext"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>
