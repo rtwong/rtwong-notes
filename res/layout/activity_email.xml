@@ -44,16 +44,6 @@
         android:text="Send All" />
 
     <TextView
-        android:id="@+id/emailtext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/emailsendto"
-        android:layout_alignParentTop="true"
-        android:text="E-mail"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="40dp" />
-
-    <TextView
         android:id="@+id/Sendtotext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,5 +64,15 @@
 
         <requestFocus />
     </EditText>
+
+    <TextView
+        android:id="@+id/emailtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="E-mail"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40dp" />
 
 </RelativeLayout>
