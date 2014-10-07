@@ -1084,7 +1084,7 @@ containing a value of this type.
         public static final int AddToDoText=0x7f05004e;
         public static final int ArchivedToDo=0x7f05003d;
         public static final int ArchivedTodoList=0x7f05003c;
-        public static final int Sendtotext=0x7f050044;
+        public static final int Sendtotext=0x7f050042;
         public static final int ToDoText=0x7f05004d;
         public static final int action_bar=0x7f05001c;
         public static final int action_bar_activity_content=0x7f050015;
@@ -1115,7 +1115,7 @@ containing a value of this type.
         public static final int emailfromcurrent=0x7f05004a;
         public static final int emailfromcurrentbutton=0x7f050048;
         public static final int emailsendto=0x7f050043;
-        public static final int emailtext=0x7f050042;
+        public static final int emailtext=0x7f050044;
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
